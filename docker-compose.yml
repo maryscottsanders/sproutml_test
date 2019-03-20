@@ -1,0 +1,13 @@
+version: "3"
+services:
+
+  flask:
+    build: .
+    ports:
+      - "8080:8080"
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+      restart_policy:
+        condition: on-failure

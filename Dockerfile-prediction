@@ -1,0 +1,23 @@
+FROM python:3.7
+
+WORKDIR /app
+
+RUN pip install --upgrade pip
+
+COPY ./requirements.txt ./
+
+RUN pip install -r ./requirements.txt
+
+COPY ./sproutml/flask_core.py ./
+COPY ./sproutml/flask_run.py ./
+COPY ./sproutml/processor.py ./
+
+# Need to access the most recent version of each model type. Right now a specific example model is provided.
+#COPY ./sproutml/models/embedding_model.pkl ./
+#COPY ./sproutml/models/prediction_model.pkl ./
+COPY ./models/embedding/embedding_190227_153559.pkl ./
+COPY ./models/prediction/prediction_190227_153149.pkl ./
+
+EXPOSE 8080
+
+CMD [ "python", "./flask_run.py" ]

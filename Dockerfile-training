@@ -1,0 +1,27 @@
+FROM python:3.6-stretch
+
+WORKDIR /app
+
+RUN pip install --upgrade pip
+
+ENV PYTHONUNBUFFERED 1
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        libatlas-base-dev gfortran
+# ^ for pandas
+
+COPY ./requirements_training.txt ./
+
+RUN pip install -r ./requirements_training.txt
+RUN python -m nltk.downloader wordnet punkt
+
+COPY ./customer_complaints_topic_clean.csv ./
+
+COPY ./sproutml/loader.py ./
+COPY ./sproutml/processor.py ./
+COPY ./sproutml/embedding_modeler.py ./
+COPY ./sproutml/prediction_modeler.py ./
+COPY ./sproutml/pipeline.py ./
+
+CMD [ "python", "./pipeline.py" ]

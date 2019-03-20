@@ -1,0 +1,7 @@
+#pandas==0.22.0
+sklearn==0
+Flask==1.0.2
+gensim==3.7.1
+nltk==3.4
+tqdm==4.30.0
+regex==2019.2.3
