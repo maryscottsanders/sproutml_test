@@ -6,13 +6,12 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 import joblib
 
-
 class TopicModeler:
     """Create model to predict labels for text data
     """
     def train_test_pipeline(self, input_data_file):
         """Create model to predict labels for text data
-        
+
         Arguments:
             input_data_file {df} -- text with labels
         """
